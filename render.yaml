@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: telegram-bot
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+      pip install gunicorn
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 120
+    envVars:
+      - key: TOKEN
+        value: "8504170878:AAEFeQ5bzYkDBRgycgLms61dfFEZy2VN9QA"
+      - key: OWNER_ID
+        value: "8406101760"
+      - key: ADMIN_ID
+        value: "8406101760"
+      - key: PORT
+        sync: false
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /health
